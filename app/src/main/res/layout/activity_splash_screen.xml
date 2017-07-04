@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+
+    android:orientation="vertical"
+
+    tools:context="com.machinser.portfolio.SplashScreen">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayout"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40px"
+        >
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:id="@+id/vtlo"
+
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginTop="20px"
+            android:text="www.vatakaravarthamanam.com"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:layout_above="@+id/googleButton"
+            android:layout_centerHorizontal="true" />
+
+        <com.google.android.gms.common.SignInButton
+
+            android:layout_width="match_parent"
+            android:id="@+id/googleButton"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+        </com.google.android.gms.common.SignInButton>
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
