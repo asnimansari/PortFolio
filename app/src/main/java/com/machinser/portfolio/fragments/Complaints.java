@@ -84,9 +84,7 @@ public class Complaints extends Fragment {
 
         String about_person_string = getActivity().getResources().getString(R.string.about_person);
 //        RECORDING SECTION
-        output_file =
-        Environment.getExternalStorageDirectory()
-                .getAbsolutePath() + "/"+user.getDisplayName()+ UUID.randomUUID()+".mp3";
+        output_file = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+ UUID.randomUUID()+".mp3";
 //        (TODO) CHANGE AS EMAIL ID AND UUI FORTMAT
 //        (TODO) CHECK FOR INTERNET
 

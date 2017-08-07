@@ -28,18 +28,18 @@ public class AboutPerson extends Fragment {
 //    ImageView banner;
     WebView about_person_view;
     private boolean simpleXmlCardExpanded = false;
-    ImageButton onSimpleXmlExampleToggleActionClicked;
+//    ImageButton onSimpleXmlExampleToggleActionClicked;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        onSimpleXmlExampleToggleActionClicked  = (ImageButton) getActivity().findViewById(R.id.onSimpleXmlExampleToggleActionClicked);
-        onSimpleXmlExampleToggleActionClicked.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSimpleXmlExampleToggleActionClicked();
-            }
-        });
+//        onSimpleXmlExampleToggleActionClicked  = (ImageButton) getActivity().findViewById(R.id.onSimpleXmlExampleToggleActionClicked);
+//        onSimpleXmlExampleToggleActionClicked.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onSimpleXmlExampleToggleActionClicked();
+//            }
+//        });
 
     }
 
@@ -49,25 +49,5 @@ public class AboutPerson extends Fragment {
         Log.e("CREATED VoEW","asdasd");
         return inflater.inflate(R.layout.about_person,container,false);
     }
-    public void onSimpleXmlExampleToggleActionClicked() {
-
-        toggleExpandButtonImage(onSimpleXmlExampleToggleActionClicked, simpleXmlCardExpanded);
-
-        final TextView description = (TextView) getView().findViewById(R.id.text_simple_xml_description);
-        toggleTextExpanded(description, simpleXmlCardExpanded);
-
-        simpleXmlCardExpanded = !simpleXmlCardExpanded;
-    }
-    private void toggleExpandButtonImage(ImageButton button, boolean isExpanded) {
-        final int newDrawableId = isExpanded ?
-                R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp;
-        final Drawable newDrawable = AppCompatResources.getDrawable(getActivity(), newDrawableId);
-        button.setImageDrawable(newDrawable);
-    }
-    private void toggleTextExpanded(TextView textView, boolean isExpanded) {
-        final int newVisibility = isExpanded ? TextView.GONE : TextView.VISIBLE;
-        textView.setVisibility(newVisibility);
-    }
-
 
 }
