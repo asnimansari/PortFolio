@@ -4,10 +4,14 @@ package com.machinser.portfolio.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,8 +22,10 @@ import com.machinser.portfolio.R;
 import com.machinser.portfolio.models.Feed;
 import com.machinser.portfolio.utils.FeedAdapter;
 import com.machinser.portfolio.utils.FireBaseUtilities;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,25 +33,48 @@ import java.util.Map;
  */
 
 public class NewsFeed extends Fragment {
-//    ImageView banner;
-//    WebView about_person_view;
+    private String TAG = "NEWS_FEED";
+
+
     FirebaseDatabase database ;
     private DatabaseReference mDatabase;
     private ArrayList<Feed> feedArrayList;
+    private RecyclerView lv;
 
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        lv = (RecyclerView) view.findViewById(R.id.lv);
+        lv.setLayoutManager(new LinearLayoutManager(getContext()));
         database = FireBaseUtilities.getDatabase();
         mDatabase = database.getReference().child("feed");
 
+
+
         feedArrayList = new ArrayList<>();
         mDatabase.keepSynced(true);
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                processnodes((Map<String,Object>) dataSnapshot.getValue());
+                Iterable<DataSnapshot> dataSnapshots = dataSnapshot.getChildren();
+
+                Feed individual_news_feed;// = new Feed();
+                feedArrayList.clear();
+
+                for (DataSnapshot dataSnapshot1 :dataSnapshots){
+                    individual_news_feed = dataSnapshot1.getValue(Feed.class);
+                    feedArrayList.add(individual_news_feed);
+
+                    Log.e(TAG,individual_news_feed.event_title);
+                    Log.e(TAG,feedArrayList.size()+"");
+
+
+                }
+
+                FeedAdapter feedAdapter = new FeedAdapter(feedArrayList,getContext(),getFragmentManager());
+                lv.setAdapter(feedAdapter);
+
 
             }
 
@@ -59,22 +88,7 @@ public class NewsFeed extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.news_feed,container,false);
-    }
-    private void processnodes(Map<String,Object> donors) {
-
-//        String[] phone_nos = new String[3];
-        for (Map.Entry<String, Object> entry : donors.entrySet()) {
-            Map singleFeed = (Map) entry.getValue();
-            Feed feed = new Feed(singleFeed);
-            feedArrayList.add(feed);
-        }
-        displayprocessedfeed();
+        return inflater.inflate(R.layout.news_layout,container,false);
     }
 
-    private void displayprocessedfeed() {
-        if(feedArrayList!=null){
-//            FeedAdapter fee
-        }
-    }
 }

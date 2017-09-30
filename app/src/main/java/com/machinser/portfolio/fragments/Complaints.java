@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,7 +33,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.machinser.portfolio.R;
+import com.machinser.portfolio.models.AudioComplaint;
 import com.machinser.portfolio.models.FeedBack;
+import com.machinser.portfolio.utils.FireBaseUtilities;
 
 import java.io.File;
 import java.io.IOException;
@@ -210,7 +213,11 @@ public class Complaints extends Fragment {
 
     private void uploadFile(){
         Uri uploadfile = Uri.fromFile(new File(output_file));
-        StorageReference audioRef = storageRef.child("feedbacks/"+uploadfile.getLastPathSegment());
+        File f = new File(output_file);
+
+
+        final long file_size = f.length();
+        StorageReference audioRef = storageRef.child("feedbacks/"+UUID.randomUUID()+".mp3");
         UploadTask uploadTask = audioRef.putFile(uploadfile);
 
         uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -222,6 +229,18 @@ public class Complaints extends Fragment {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.e("UPLOAD","Upload Failed");
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+
+                DatabaseReference databaseReference = FireBaseUtilities.getDatabase().getReference().child("audio_feedbacks");
+
+
+                @SuppressWarnings("VisibleForTests") String download_url = taskSnapshot.getDownloadUrl().toString();
+
+                databaseReference.push().setValue(new AudioComplaint(download_url,file_size));
             }
         });
     }

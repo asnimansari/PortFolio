@@ -46,13 +46,13 @@ public class AboutPerson extends Fragment {
         banner = (ImageView)getActivity().findViewById(R.id.profile_image);
         heigh=heigh-60;
         RelativeLayout.LayoutParams l=new RelativeLayout.LayoutParams(210,210);
-        l.setMargins(0,heigh,0,0);
-        banner.setMaxHeight(set);
-        banner.setMinimumHeight(set);
-        banner.setMaxWidth(set);
-        banner.setMinimumWidth(set);
-        l.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        banner.setLayoutParams(l);
+//        l.setMargins(0,heigh,0,0);
+//        banner.setMaxHeight(set);
+//        banner.setMinimumHeight(set);
+//        banner.setMaxWidth(set);
+//        banner.setMinimumWidth(set);
+//
+//        banner.setLayoutParams(l);
 //        onSimpleXmlExampleToggleActionClicked  = (ImageButton) getActivity().findViewById(R.id.onSimpleXmlExampleToggleActionClicked);
 //        onSimpleXmlExampleToggleActionClicked.setOnClickListener(new View.OnClickListener() {
 //            @Override
