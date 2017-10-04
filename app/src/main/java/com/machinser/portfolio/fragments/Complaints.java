@@ -1,6 +1,7 @@
 package com.machinser.portfolio.fragments;
 
 
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -130,17 +132,38 @@ public class Complaints extends Fragment {
         submit_feedback_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String subject = complaint_subject.getText().toString().trim();
-                String body = complaint_body.getText().toString().trim();
+                final String subject = complaint_subject.getText().toString().trim();
+                final String body = complaint_body.getText().toString().trim();
                 if(subject.length() == 0 || body.length() == 0){
                     Toast.makeText(getActivity(), "Cant Send Without a Subject or Body", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    FeedBack feedBack = new FeedBack(subject,"user",body);
-                    databaseReference.child("feedback").push().setValue(feedBack);
-                    Toast.makeText(getActivity(), "Your Feed Back Has Been Registered", Toast.LENGTH_SHORT).show();
-                    complaint_subject.setText("");
-                    complaint_body.setText("");
+
+
+                    AlertDialog.Builder alerb = new AlertDialog.Builder(getContext());
+                    alerb.setTitle("Post News");
+                    alerb.setMessage("Do u want post this feedback?").setCancelable(false);
+                    alerb.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            FeedBack feedBack = new FeedBack(subject,"user",body);
+                            databaseReference.child("feedback").push().setValue(feedBack);
+                            Toast.makeText(getActivity(), "Your Feed Back Has Been Registered", Toast.LENGTH_SHORT).show();
+                            complaint_subject.setText("");
+                            complaint_body.setText("");
+
+                        }
+                    });
+                    alerb.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    AlertDialog alertDialog = alerb.create();
+                    alertDialog.show();
+
+
                 }
             }
         });

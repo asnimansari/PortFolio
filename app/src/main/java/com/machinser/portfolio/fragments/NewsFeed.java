@@ -25,6 +25,8 @@ import com.machinser.portfolio.utils.FireBaseUtilities;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +56,8 @@ public class NewsFeed extends Fragment {
 
         feedArrayList = new ArrayList<>();
         mDatabase.keepSynced(true);
+        mDatabase.orderByChild("date_created");
+        mDatabase.limitToLast(1);
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -65,12 +69,11 @@ public class NewsFeed extends Fragment {
                 for (DataSnapshot dataSnapshot1 :dataSnapshots){
                     individual_news_feed = dataSnapshot1.getValue(Feed.class);
                     feedArrayList.add(individual_news_feed);
-
                     Log.e(TAG,individual_news_feed.event_title);
-                    Log.e(TAG,feedArrayList.size()+"");
-
-
                 }
+
+                Collections.reverse(feedArrayList);
+
 
                 FeedAdapter feedAdapter = new FeedAdapter(feedArrayList,getContext(),getFragmentManager());
                 lv.setAdapter(feedAdapter);

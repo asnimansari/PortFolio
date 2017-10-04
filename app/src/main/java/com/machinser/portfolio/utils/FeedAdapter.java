@@ -68,6 +68,10 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>{
 
         holder.event_title.setText( event_title);
         holder.event_body.setText(event_body);
+        String updated_before = feedArrayList.get(position).getDisplayDateString();
+        if(updated_before !=null){
+            holder.added_before.setText(updated_before);
+        }
 
 
         if (event_image !=null){
@@ -141,6 +145,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>{
 
         public TextView event_title;
         public TextView event_body;
+        public TextView added_before;
         public ImageView event_image;
 
         Context context;
@@ -150,6 +155,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>{
             super(itemView);
             event_title = (TextView)itemView.findViewById(R.id.event_title);
             event_body = (TextView)itemView.findViewById(R.id.event_content);
+            added_before = (TextView)itemView.findViewById(R.id.added_before);
             event_image = (ImageView)itemView.findViewById(R.id.event_image);
             this.context = context;
             this.fragmentManger = fragmentManager;
@@ -165,6 +171,11 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>{
             Bundle bundle = new Bundle();
             bundle.putString("event_title",feedArrayList.get(position).event_title);
             bundle.putString("event_body",feedArrayList.get(position).event_body);
+
+            if(feedArrayList.get(position).date_string !=null){
+                bundle.putString("date_string",feedArrayList.get(position).date_string.toString());
+            }
+
             if(feedArrayList.get(position).event_image !=null){
                 bundle.putString("event_image",feedArrayList.get(position).event_image);
             }

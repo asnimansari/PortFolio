@@ -2,6 +2,7 @@ package com.machinser.portfolio;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -51,11 +52,12 @@ public class SplashScreen extends AppCompatActivity {
 
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        vtlo = (ImageView)findViewById(R.id.vtlo);
-        int screenWidth = displaymetrics.widthPixels;
-        int screenHeight = displaymetrics.heightPixels;
-        vtlo.setMaxHeight(screenWidth);
-        vtlo.setMinimumHeight(screenWidth);
+
+        TextView tv = (TextView) findViewById(R.id.myMLA);
+        Typeface face = Typeface.createFromAsset(getAssets(),
+                "fonts/musketbold.otf");
+        tv.setTypeface(face);
+
 
 //        LOGIN SECTION
         mAuth = FirebaseAuth.getInstance();
@@ -63,7 +65,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() !=null){
-                    googleButton.setVisibility(View.GONE);
+                    googleButton.setVisibility(View.INVISIBLE);
 //                    Intent i
                     Toast.makeText(SplashScreen.this, "Welcome " + firebaseAuth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
 
@@ -134,7 +136,7 @@ public class SplashScreen extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("GOOGLE_LOGIN", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            googleButton.setVisibility(View.GONE);
+                            googleButton.setVisibility(View.INVISIBLE);
                             Toast.makeText(SplashScreen.this, "Welcome " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
                             movetoMainScreen();
 //                            updateUI(user);

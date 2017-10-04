@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:orientation="vertical"
 
     android:background="#FFFFFF"
@@ -11,74 +10,72 @@
 
     <ImageView
         android:id="@+id/rd"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="230dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="0dp"
-        android:scaleType=
-            "centerCrop"
+        android:scaleType="centerCrop"
         android:src="@drawable/parakkal"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Parakkal Abdulla"
-        android:textSize="25sp"
-        android:gravity="center_horizontal"
-        android:textColor="#27ae60"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/rd"
-        android:id="@+id/textView2"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MLA of Kuttiyadi"
-        android:textSize="15sp"
-        android:textColor="#000000"
-        android:paddingTop="0dp"
-       />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/paragraph"
-        android:paddingTop="7dp"
-        android:textSize="14sp"
-        android:layout_marginTop="37dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="0dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
-
+        android:contentDescription="" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-
         android:id="@+id/profile_image"
-        android:layout_width="wrap_content"
-        android:layout_height="135dp"
-        android:layout_marginTop="95dp"
+        android:layout_width="140dp"
+        android:padding="10dp"
+        android:background="@drawable/haalo"
+
+        android:layout_height="140dp"
         android:src="@drawable/banner"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="101dp" />
+
+
+
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="PARAKKAL ABDULLA"
+        android:textColor="#27ae60"
+        android:textSize="25sp"
+        android:layout_below="@+id/profile_image"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="0dp"
+        android:text="MLA OF KUTTIADY"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignRight="@+id/profile_image"
+        android:layout_alignEnd="@+id/profile_image" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/paragraph"
+        android:padding="7dp"
+        android:textSize="14sp"
+
+        android:layout_marginTop="14dp"
+
+        android:id="@+id/textView"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>
 
 
 
